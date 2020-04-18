@@ -1,0 +1,11 @@
+.root {
+  max-width: 345px
+}
+
+.media {
+  height: 20vh
+}
+
+.textCenter{
+  text-align: center!important;
+}

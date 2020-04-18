@@ -1,0 +1,14 @@
+{
+    "confirmed":{
+        "heading":"Confirmed Cases",
+        "subHeading":"Number of confirmed COVID-19 cases"
+    },
+    "recovered":{
+        "heading":"Recovered Cases",
+        "subHeading":"Number of recoveries from COVID-19"
+    },
+    "deaths":{
+        "heading":"Deaths",
+        "subHeading":"Total number of deaths caused by COVID-19"
+    }
+}
