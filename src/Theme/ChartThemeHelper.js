@@ -2,7 +2,7 @@ const chartThemeHelper = (data) => {
   let options = {
     chart: {
       id: "basic-bar"
-    },
+    },    
     legend: {
       show: true,
       labels: {
@@ -20,7 +20,7 @@ const chartThemeHelper = (data) => {
     },
     colors: ['#368bf6', '#eb5569'],
     xaxis: {
-      categories: data.data.map(({ date }) => date)
+      categories: data.dates
     },
     yaxis:{}
   };
@@ -35,6 +35,7 @@ const chartThemeHelper = (data) => {
         colors: '#FFFFFF'
       }
     };  
+    
   }else{
     options.xaxis.labels = {
       style: {
@@ -46,8 +47,9 @@ const chartThemeHelper = (data) => {
         colors: '#373d3f'
       }
     };
+    
   }
-
+  options.tooltip = {theme:data.theme };
   return options;
 }
 export default chartThemeHelper;
