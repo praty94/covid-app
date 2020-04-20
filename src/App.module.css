@@ -1,0 +1,17 @@
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 75px 20px 20px 20px;
+  flex-direction: column;
+}
+
+.dark {
+  background-color: #202020;
+  color: #ffff;
+}
+
+.light {
+  background-color: #ffff;
+  color: black;
+}
