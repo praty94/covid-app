@@ -9,6 +9,6 @@
     },
     "deaths":{
         "heading":"Deaths",
-        "subHeading":"Total number of deaths caused by COVID-19"
+        "subHeading":"Number of deaths caused by COVID-19"
     }
 }

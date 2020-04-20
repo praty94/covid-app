@@ -1,12 +1,11 @@
 import React from 'react';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
-import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
-import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import styles from './Cards.module.css';
 import messages from '../../Messages/messages.json';
+import CountUp from 'react-countup';
 
 const _Card = (props) => {
     return (
@@ -14,6 +13,12 @@ const _Card = (props) => {
             <CardActionArea className={styles.textCenter}>
                 <img alt={props.data.type} src={props.data.img} className={styles.media}></img>
                 <CardContent>
+                    <Typography variant="h4">
+                        <b> {props.data.value ? 
+                            <CountUp start={0} end={props.data.value} duration={1} separator=","/>
+                            : "..."}
+                         </b>
+                    </Typography>
                     <Typography gutterBottom variant="h5" component="h2">
                         {messages[props.data.type].heading}
                     </Typography>
@@ -21,15 +26,7 @@ const _Card = (props) => {
                         {messages[props.data.type].subHeading}
                     </Typography>
                 </CardContent>
-            </CardActionArea>
-            <CardActions>
-                <Button size="small" color="primary">
-                    Share
-        </Button>
-                <Button size="small" color="primary">
-                    Learn More
-        </Button>
-            </CardActions>
+            </CardActionArea>            
         </Card>
     );
 }
