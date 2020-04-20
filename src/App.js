@@ -1,5 +1,5 @@
 import React from 'react';
-import { Cards, Charts, Wrapper, AppBar } from './Components';
+import { Cards, Wrapper, AppBar,NewCharts } from './Components';
 import styles from './App.module.css';
 import { fetchSummary } from './api';
 import { ThemeProvider } from '@material-ui/core/styles';
@@ -19,15 +19,15 @@ class App extends React.Component {
       <ThemeProvider theme={ThemeHelper(this.state.theme)}>
         <AppBar curTheme={this.state.theme} themeToggleHandler={() => this.toggleTheme()}></AppBar>
         <Wrapper className={cx(styles.container,bgClass)}>
-          <Cards data={this.state.summary}></Cards>          
-          <Charts theme={this.state.theme}></Charts>          
+          <Cards data={this.state.summary}></Cards>
+          <NewCharts curTheme={this.state.theme}></NewCharts>         
         </Wrapper>
       </ThemeProvider>
     );
   }
   async componentDidMount() {
-    var response = await fetchSummary();
-    this.setState({ summary: response.data });
+    let response = await fetchSummary();
+    this.setState({ summary: response.data });    
   }
   
   toggleTheme = () =>{
