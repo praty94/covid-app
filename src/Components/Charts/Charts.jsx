@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { fetchDaily } from '../../api';
-import { Line, Bar } from 'react-chartjs-2';
+import { Line } from 'react-chartjs-2';
 import styles from './Charts.module.css';
 import Wrapper from '../HOC/Wrapper';
 
@@ -14,29 +14,29 @@ const Charts = (props) => {
     fetchApi();
   }, []);
   let options = {};
-  if(props.theme !== "light"){
-    options = {
-      legend:{
-        labels:{
-          fontColor:"#ffff",
-          padding:50
+  if (props.theme !== "light") {
+    options = {     
+      legend: {
+        labels: {
+          fontColor: "#ffff",
+          padding: 50
         }
       },
       scales: {
-        xAxes: [{          
+        xAxes: [{
           gridLines: {
             display: true,
-            color:"#4f4f4f",
-            zeroLineColor:"#ededed"
-          },ticks: {
+            color: "#4f4f4f",
+            zeroLineColor: "#ededed"
+          }, ticks: {
             fontColor: "#ffff"
           }
-        }],        
+        }],
         yAxes: [{
           gridLines: {
             display: true,
-            color:"#4f4f4f",
-            zeroLineColor:"#ededed"
+            color: "#4f4f4f",
+            zeroLineColor: "#ededed"
           },
           ticks: {
             fontColor: "#ffff"
@@ -44,38 +44,37 @@ const Charts = (props) => {
         }]
       }
     }
-  }else{    
-    options = {
-      legend:{
-        labels:{
-          fontColor:"#6f6f6f",
-          padding:50
+  } else {
+    options = {          
+      legend: {
+        labels: {
+          fontColor: "#6f6f6f",
+          padding: 50
         }
       },
       scales: {
-        xAxes: [{          
+        xAxes: [{
           gridLines: {
             display: true,
-            color:"#e5e5e5",
-            zeroLineColor:"#1f1f1f"
-          },ticks: {
+            color: "#e5e5e5",
+            zeroLineColor: "#1f1f1f"
+          }, ticks: {
             fontColor: "#6f6f6f"
           }
-        }],        
+        }],
         yAxes: [{
           gridLines: {
             display: true,
-            color:"#e5e5e5",
-            zeroLineColor:"#1f1f1f"
+            color: "#e5e5e5",
+            zeroLineColor: "#1f1f1f"
           },
           ticks: {
             fontColor: "#6f6f6f"
           }
         }]
       }
-    }  
+    }
   }
-  
 
   let lineChart = (
     dailyData && dailyData.length > 0 ?
@@ -84,12 +83,12 @@ const Charts = (props) => {
           labels: dailyData.map(({ date }) => date),
           datasets: [
             {
-              label: 'Confirmed',              
+              label: 'Confirmed',
               fill: true,
               lineTension: 0.1,
               backgroundColor: 'rgba(59, 136, 246,0.4)',
               borderColor: 'rgba(59, 136, 246,1)',
-              borderCapStyle: 'butt',
+
               borderDash: [],
               borderDashOffset: 0.0,
               borderJoinStyle: 'miter',

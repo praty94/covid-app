@@ -27,7 +27,7 @@ export const fetchDaily = async () => {
             deaths:dailyData.deaths.total,
             date:dailyData.reportDate
         }));  
-        console.log(formattedData);
+        //console.log(formattedData);
         return formattedData;
         
     }catch{
