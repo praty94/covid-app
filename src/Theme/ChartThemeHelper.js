@@ -20,7 +20,7 @@ const chartThemeHelper = (data) => {
     },
     colors: ['#368bf6', '#eb5569'],
     xaxis: {
-      categories: data.data.map(({ date }) => date)
+      categories: data.dates
     },
     yaxis:{}
   };
