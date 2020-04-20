@@ -21,7 +21,7 @@ export const fetchCountries = async () => {
 
 export const fetchDaily = async () => {
     try{        
-        const {data} = await axios.get(url+"/daily");   
+        const {data} = await axios.get(url+"/daily");        
         const formattedData = data.map((dailyData)=> ({
             confirmed: dailyData.confirmed.total,
             deaths:dailyData.deaths.total,

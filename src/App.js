@@ -1,22 +1,26 @@
 import React from 'react';
-import { Cards, Charts, CountryPicker, Wrapper, AppBar } from './Components';
+import { Cards, Charts, Wrapper, AppBar } from './Components';
 import styles from './App.module.css';
 import { fetchSummary } from './api';
 import { ThemeProvider } from '@material-ui/core/styles';
-import theme from './Theme/Theme';
+import ThemeHelper from './Theme/ThemeHelper';
+import cx from 'classnames';
 
+let light = "light",dark="dark";
 class App extends React.Component {
+
   state = {
-    summary: {}
+    summary: {},
+    theme:light
   }
-  render() {
+  render() {    
+    let bgClass = this.state.theme === light ? styles.light : styles.dark;
     return (
-      <ThemeProvider theme={theme}>
-        <AppBar></AppBar>
-        <Wrapper className={styles.container}>
-          <Cards data={this.state.summary}></Cards>
-          <Charts></Charts>
-          <CountryPicker></CountryPicker>
+      <ThemeProvider theme={ThemeHelper(this.state.theme)}>
+        <AppBar curTheme={this.state.theme} themeToggleHandler={() => this.toggleTheme()}></AppBar>
+        <Wrapper className={cx(styles.container,bgClass)}>
+          <Cards data={this.state.summary}></Cards>          
+          <Charts theme={this.state.theme}></Charts>          
         </Wrapper>
       </ThemeProvider>
     );
@@ -24,6 +28,10 @@ class App extends React.Component {
   async componentDidMount() {
     var response = await fetchSummary();
     this.setState({ summary: response.data });
+  }
+  
+  toggleTheme = () =>{
+    this.state.theme === light ? this.setState({theme:dark}) : this.setState({theme:light});
   }
 }
 

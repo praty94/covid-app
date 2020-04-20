@@ -5,10 +5,11 @@ import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import InputBase from '@material-ui/core/InputBase';
 import { fade, makeStyles } from '@material-ui/core/styles';
-import MenuIcon from '@material-ui/icons/Menu';
+import Light from '@material-ui/icons/Brightness7';
+import Dark from '@material-ui/icons/Brightness4';
 import SearchIcon from '@material-ui/icons/Search';
 
-const useStyles = makeStyles((theme) => ({  
+const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
   },
@@ -28,6 +29,20 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: fade(theme.palette.common.white, 0.15),
     '&:hover': {
       backgroundColor: fade(theme.palette.common.white, 0.25),
+    },
+    marginLeft: 0,
+    width: '100%',
+    [theme.breakpoints.up('sm')]: {
+      marginLeft: theme.spacing(1),
+      width: 'auto',
+    },
+  },
+  searchDark: {
+    position: 'relative',
+    borderRadius: theme.shape.borderRadius,
+    backgroundColor: fade(theme.palette.common.black, 0.15),
+    '&:hover': {
+      backgroundColor: fade(theme.palette.common.black, 0.25),
     },
     marginLeft: 0,
     width: '100%',
@@ -63,25 +78,17 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function HeaderAppBar() {
+export default function HeaderAppBar(props) {
   const classes = useStyles();
   
   return (
-    <div className={classes.root}>      
-      <AppBar position="static">
+    <div className={classes.root}>
+      <AppBar position="fixed">
         <Toolbar>
-          <IconButton
-            edge="start"
-            className={classes.menuButton}
-            color="inherit"
-            aria-label="open drawer"
-          >
-            <MenuIcon />
-          </IconButton>
           <Typography className={classes.title} variant="h6" noWrap>
-           Covid-19 Tracker
+            Covid-19 Tracker
           </Typography>
-          <div className={classes.search}>
+          <div className={props.curTheme === "light" ? classes.searchDark : classes.search }>
             <div className={classes.searchIcon}>
               <SearchIcon />
             </div>
@@ -94,8 +101,17 @@ export default function HeaderAppBar() {
               inputProps={{ 'aria-label': 'search' }}
             />
           </div>
+          <IconButton
+            edge="end"
+            className={classes.menuButton}
+            color="inherit"
+            aria-label="Toggle Dark and Light mode"
+            onClick={() => props.themeToggleHandler()}>
+            {props.curTheme === "light" ? <Light /> : <Dark />}
+
+          </IconButton>
         </Toolbar>
-      </AppBar>      
+      </AppBar>
     </div>
   );
 }

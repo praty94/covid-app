@@ -1,8 +1,16 @@
 .root {
   max-width: 345px;
-  margin:2%;
+  margin:2%;  
 }
-
+.confirmed{
+  border-bottom: 10px solid #368bf6;
+}
+.recovered{
+  border-bottom: 10px solid #00af80;
+}
+.deaths{
+  border-bottom: 10px solid #eb5569;
+}
 .media {
   height: 20vh;
   padding: 1em;

@@ -6,10 +6,11 @@ import Typography from '@material-ui/core/Typography';
 import styles from './Cards.module.css';
 import messages from '../../Messages/messages.json';
 import CountUp from 'react-countup';
+import cx from 'classnames';
 
 const _Card = (props) => {
     return (
-        <Card className={styles.root}>
+        <Card className={cx(styles.root,styles[props.data.type])}>
             <CardActionArea className={styles.textCenter}>
                 <img alt={props.data.type} src={props.data.img} className={styles.media}></img>
                 <CardContent>
