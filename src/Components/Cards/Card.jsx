@@ -9,15 +9,19 @@ import CountUp from 'react-countup';
 import cx from 'classnames';
 
 const _Card = (props) => {
+    let count = null;
+    if(!props.data.value){
+        count = props.data.value === 0 ? 0 : "...";
+    }else{
+        count = <CountUp start={0} end={props.data.value} duration={1} separator=","/>
+    }
     return (
         <Card className={cx(styles.root,styles[props.data.type])}>
             <CardActionArea className={styles.textCenter}>
                 <img alt={props.data.type} src={props.data.img} className={styles.media}></img>
                 <CardContent>
                     <Typography variant="h4">
-                        <b> {props.data.value ? 
-                            <CountUp start={0} end={props.data.value} duration={1} separator=","/>
-                            : "..."}
+                        <b> {count}
                          </b>
                     </Typography>
                     <Typography gutterBottom variant="h5" component="h2">

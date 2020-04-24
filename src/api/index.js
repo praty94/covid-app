@@ -9,11 +9,19 @@ export const fetchSummary = async () => {
         console.error("[fetchData] Failed");
     }    
 }
+export const fetchCountrySummary = async (country) => {
+    try{
+        const {data} = await axios.get(url+"/countries"+country);
+        return data;
+    }catch{
+        console.error('[fetchCountrySummary] Failed')
+    }
+}
 
 export const fetchCountries = async () => {
     try{
         const response = await axios.get(url+"/countries");
-        return response;
+        return response.data;
     }catch{
         console.error("[fetchCountries] Failed");
     }
@@ -27,7 +35,7 @@ export const fetchDaily = async () => {
             deaths:dailyData.deaths.total,
             date:dailyData.reportDate
         }));  
-        //console.log(formattedData);
+        
         return formattedData;
         
     }catch{

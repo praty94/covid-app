@@ -6,7 +6,7 @@ import { fetchDaily } from '../../api';
 import useWindowDimensions from '../Helper/WindowDimensionHelper';
 import ChartThemeHelper from '../../Theme/ChartThemeHelper';
 
-const NewCharts = (props) => {
+const SummaryChart = (props) => {
   const { height, width } = useWindowDimensions();
   const [dailyData, setDailyData] = useState({});
   useEffect(() => {
@@ -58,4 +58,4 @@ const NewCharts = (props) => {
 
 }
 
-export default NewCharts;
+export default SummaryChart;

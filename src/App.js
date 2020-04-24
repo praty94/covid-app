@@ -1,38 +1,44 @@
 import React from 'react';
-import { Cards, Wrapper, AppBar,NewCharts } from './Components';
-import styles from './App.module.css';
-import { fetchSummary } from './api';
+import { AppBar } from './Components';
 import { ThemeProvider } from '@material-ui/core/styles';
 import ThemeHelper from './Theme/ThemeHelper';
-import cx from 'classnames';
+import { Route, Switch } from 'react-router-dom';
+import { Summary, CountrySummary } from './Components/index';
+import { withRouter } from 'react-router';
 
-let light = "light",dark="dark";
+let light = "light", dark = "dark";
 class App extends React.Component {
 
   state = {
-    summary: {},
-    theme:light
+    theme: light,
+    country: null
   }
-  render() {    
-    let bgClass = this.state.theme === light ? styles.light : styles.dark;
+  render() {
     return (
       <ThemeProvider theme={ThemeHelper(this.state.theme)}>
-        <AppBar curTheme={this.state.theme} themeToggleHandler={() => this.toggleTheme()}></AppBar>
-        <Wrapper className={cx(styles.container,bgClass)}>
-          <Cards data={this.state.summary}></Cards>
-          <NewCharts curTheme={this.state.theme}></NewCharts>         
-        </Wrapper>
+        <AppBar curTheme={this.state.theme} themeToggleHandler={() => this.toggleTheme()} routerHelper={(value) => this.routerHelper(value)}></AppBar>
+        <Switch>
+          <Route path="/country/*"><CountrySummary theme={this.state.theme} country={this.state.country ? this.state.country : this.props.location.pathname}></CountrySummary></Route>
+          <Route><Summary theme={this.state.theme}></Summary></Route>
+        </Switch>
       </ThemeProvider>
     );
   }
-  async componentDidMount() {
-    let response = await fetchSummary();
-    this.setState({ summary: response.data });    
+
+  toggleTheme = () => {
+    this.state.theme === light ? this.setState({ theme: dark }) : this.setState({ theme: light });
   }
-  
-  toggleTheme = () =>{
-    this.state.theme === light ? this.setState({theme:dark}) : this.setState({theme:light});
+  routerHelper = (value) => {
+    if (value) {
+      this.setState({ country: `/country/${value.name}` });
+
+      const { history } = this.props;
+      if (value)
+        history.push(`/country/${value.name}`);
+      else
+        history.push('/');
+    }
   }
 }
 
-export default App;
+export default withRouter(App);
