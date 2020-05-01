@@ -1,12 +1,10 @@
 import React from 'react';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import IconButton from '@material-ui/core/IconButton';
-import Typography from '@material-ui/core/Typography';
+import {Toolbar,AppBar,IconButton,Typography} from '@material-ui/core';
 import { fade, makeStyles } from '@material-ui/core/styles';
 import Light from '@material-ui/icons/Brightness7';
 import Dark from '@material-ui/icons/Brightness4';
 import AsyncSearch from './AsyncSearch';
+import MenuIcon from '@material-ui/icons/Menu';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -84,6 +82,14 @@ export default function HeaderAppBar(props) {
     <div className={classes.root}>
       <AppBar position="fixed">
         <Toolbar>
+        <IconButton
+            edge="start"
+            className={classes.menuButton}
+            color="inherit"
+            aria-label="open drawer"
+          >
+            <MenuIcon />
+          </IconButton>
           <Typography className={classes.title} variant="h6" noWrap>
             Covid-19 Tracker
           </Typography>
