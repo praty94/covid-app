@@ -7,6 +7,9 @@ const themeHelper = (theme) => {
               primary: {
                 main : "#FFFFFF"
               },
+              secondary:{
+                main : '#368bf6'
+              },
               type:"light"
             }
         });
@@ -14,7 +17,10 @@ const themeHelper = (theme) => {
         return createMuiTheme({
             palette: {
               primary: {
-                main : "#202020"
+                main : "#333"
+              },
+              secondary:{
+                main : '#368bf6'
               },
               type:"dark"
             }
