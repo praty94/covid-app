@@ -5,20 +5,21 @@ import ThemeHelper from './Theme/ThemeHelper';
 import { Route, Switch } from 'react-router-dom';
 import { Summary, CountrySummary } from './Components/index';
 import { withRouter } from 'react-router';
+import {countryValidator,getCountry} from './Components/Helper/CountryHelper';
 
 let light = "light", dark = "dark";
 class App extends React.Component {
 
   state = {
     theme: light,
-    country: null
+    country: countryValidator(this.props.location.pathname)
   }
   render() {
     return (
       <ThemeProvider theme={ThemeHelper(this.state.theme)}>
-        <AppBar curTheme={this.state.theme} themeToggleHandler={() => this.toggleTheme()} routerHelper={(value) => this.routerHelper(value)}></AppBar>
+        <AppBar country={this.getCountryForSearch()} curTheme={this.state.theme} themeToggleHandler={() => this.toggleTheme()} routerHelper={(value) => this.routerHelper(value)}></AppBar>
         <Switch>
-          <Route path="/country/*"><CountrySummary theme={this.state.theme} country={this.state.country ? this.state.country : this.props.location.pathname}></CountrySummary></Route>
+          <Route path="/covid-app/country/*"><CountrySummary theme={this.state.theme} country={this.state.country}></CountrySummary></Route>
           <Route><Summary theme={this.state.theme}></Summary></Route>
         </Switch>
       </ThemeProvider>
@@ -30,14 +31,17 @@ class App extends React.Component {
   }
   routerHelper = (value) => {
     if (value) {
-      this.setState({ country: `/country/${value.name}` });
+      this.setState({ country: `/covid-app/country/${value.name}` });
 
       const { history } = this.props;
       if (value)
-        history.push(`/country/${value.name}`);
+        history.push(`/covid-app/country/${value.name}`);
       else
-        history.push('/');
+        history.push('/covid-app');
     }
+  }
+  getCountryForSearch = () => {
+    return {name : getCountry(this.state.country)};
   }
 }
 

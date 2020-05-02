@@ -94,7 +94,7 @@ export default function HeaderAppBar(props) {
             Covid-19 Tracker
           </Typography>
           
-          <AsyncSearch routerHelper={props.routerHelper}></AsyncSearch>
+          <AsyncSearch country={props.country} routerHelper={props.routerHelper}></AsyncSearch>
           <IconButton
             edge="end"
             className={classes.menuButton}

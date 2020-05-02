@@ -33,9 +33,9 @@ class CountrySummary extends React.Component {
         await this.getCountrySummary();
     }
     getCountrySummary = async() => {
-        if (this.props.country.match("^/country/")) {
+        if (this.props.country.match("^/covid-app/country/")) {
             let country = this.props.country;
-            country = country.replace("country/", "");
+            country = country.replace("/covid-app/country", "");
             let response = await fetchCountrySummary(country);            
             this.setState({ summary: response, country: this.props.country });
         }

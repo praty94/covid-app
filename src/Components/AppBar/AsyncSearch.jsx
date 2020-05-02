@@ -4,8 +4,7 @@ import Autocomplete from '@material-ui/lab/Autocomplete';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import { fetchCountries } from '../../api';
 
-const AsyncSearch = (props) => {
-  
+const AsyncSearch = (props) => {  
   const [open, setOpen] = React.useState(false);
   const [options, setOptions] = React.useState([]);
   const loading = open && options.length === 0;
@@ -43,6 +42,7 @@ const AsyncSearch = (props) => {
       onClose={() => {
         setOpen(false);
       }}
+      value={props.country}
       onChange={(e,value)=>props.routerHelper(value)}
       getOptionSelected={(option, value) => option.name === value.name}
       getOptionLabel={(option) => option.name}
