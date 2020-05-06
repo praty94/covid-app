@@ -11,6 +11,7 @@ const CountryChart = (props) => {
   useEffect(() => {
     if(props.data && props.data.confirmed){
     const {confirmed,recovered,deaths} = {...props.data};
+    console.log("theme " + props.theme);
     setCountryData({          
         series: [{
           name:"Covid-19 Cases",
@@ -20,11 +21,10 @@ const CountryChart = (props) => {
           chart: {
             height: 350,
             type: 'bar',
-            events: {
-              click: function(chart, w, e) {
-                // console.log(chart, w, e)
-              }
-            }
+            toolbar:{
+            tools: {
+              download: false
+            }}
           },
           colors: ['#368bf6','#00af80','#eb5569'],
           plotOptions: {
@@ -51,11 +51,18 @@ const CountryChart = (props) => {
                 fontSize: '12px'
               }
             }
+          },
+          yaxis:{
+            laels:{
+              style:{
+                colors:props.theme ===  "light" ? '#FFFFFF' : '#373d3f'
+              }
+            }
           }
         }
       });
     }
-  }, [props.curTheme,props.data]);
+  }, [props.curTheme,props.data,props.theme]);
   let barChart = (
     countryData && countryData.options && countryData.series ? <Chart
       options={countryData.options}

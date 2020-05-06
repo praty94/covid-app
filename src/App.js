@@ -12,12 +12,20 @@ class App extends React.Component {
 
   state = {
     theme: light,
-    country: countryValidator(this.props.location.pathname)
+    country: countryValidator(this.props.location.pathname),
+    appDrawerOpen : false
+  }
+  componentDidMount(){
+    this.props.history.listen((location, action) => {
+      // location is an object like window.location
+      console.log(action, location.pathname, location.state)
+  });
   }
   render() {
     return (
-      <ThemeProvider theme={ThemeHelper(this.state.theme)}>
-        <AppBar country={this.getCountryForSearch()} curTheme={this.state.theme} themeToggleHandler={() => this.toggleTheme()} routerHelper={(value) => this.routerHelper(value)}></AppBar>
+      <ThemeProvider theme={ThemeHelper(this.state.theme)}>        
+        <AppBar country={this.getCountryForSearch()} curTheme={this.state.theme}  themeToggleHandler={() => this.toggleTheme()} 
+        routerHelper={(value) => this.routerHelper(value)}></AppBar>
         <Switch>
           <Route path="/covid-app/country/*"><CountrySummary theme={this.state.theme} country={this.state.country}></CountrySummary></Route>
           <Route><Summary theme={this.state.theme}></Summary></Route>
@@ -32,17 +40,14 @@ class App extends React.Component {
   routerHelper = (value) => {
     if (value) {
       this.setState({ country: `/covid-app/country/${value.name}` });
-
-      const { history } = this.props;
-      if (value)
-        history.push(`/covid-app/country/${value.name}`);
-      else
-        history.push('/covid-app');
+      const { history } = this.props;      
+      history.push(`/covid-app/country/${value.name}`);      
     }
   }
   getCountryForSearch = () => {
     return {name : getCountry(this.state.country)};
   }
+
 }
 
 export default withRouter(App);

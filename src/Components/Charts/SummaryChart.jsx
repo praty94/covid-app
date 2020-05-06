@@ -20,7 +20,7 @@ const SummaryChart = (props) => {
         const data = await fetchDaily();
         const dates = data.map(({ date }) => date);
         const options = ChartThemeHelper({ dates, theme: props.curTheme });
-
+        
         const series = [
           {
             name: "Confirmed",

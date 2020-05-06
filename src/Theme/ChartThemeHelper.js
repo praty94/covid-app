@@ -1,8 +1,13 @@
 const chartThemeHelper = (data) => {
   let options = {
     chart: {
-      id: "basic-bar"
-    },    
+      id: "basic-bar",
+      toolbar: {
+        tools: {
+          download: false
+        }
+      }
+    },
     legend: {
       show: true,
       labels: {
@@ -14,7 +19,7 @@ const chartThemeHelper = (data) => {
     },
     dataLabels: {
       enabled: false
-    }, 
+    },
     stroke: {
       curve: 'straight'
     },
@@ -22,21 +27,21 @@ const chartThemeHelper = (data) => {
     xaxis: {
       categories: data.dates
     },
-    yaxis:{}
+    yaxis: {}
   };
   if (data.theme !== "light") {
     options.xaxis.labels = {
       style: {
         colors: '#FFFFFF'
       }
-    };  
+    };
     options.yaxis.labels = {
       style: {
         colors: '#FFFFFF'
       }
-    };  
-    
-  }else{
+    };
+
+  } else {
     options.xaxis.labels = {
       style: {
         colors: '#373d3f'
@@ -47,9 +52,9 @@ const chartThemeHelper = (data) => {
         colors: '#373d3f'
       }
     };
-    
+
   }
-  options.tooltip = {theme:data.theme };
+  options.tooltip = { theme: data.theme };
   return options;
 }
 export default chartThemeHelper;

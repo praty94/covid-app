@@ -15,7 +15,7 @@ class CountrySummary extends React.Component {
         return (
             <Wrapper className={cx(styles.container, bgClass)}>
                 <Cards data={this.state.summary}></Cards>
-                <CountryChart data={this.state.summary}></CountryChart>
+                <CountryChart theme={this.props.theme} data={this.state.summary}></CountryChart>
             </Wrapper>
         );
     }
@@ -33,7 +33,7 @@ class CountrySummary extends React.Component {
         await this.getCountrySummary();
     }
     getCountrySummary = async() => {
-        if (this.props.country.match("^/covid-app/country/")) {
+        if (this.props?.country?.match("^/covid-app/country/")) {
             let country = this.props.country;
             country = country.replace("/covid-app/country", "");
             let response = await fetchCountrySummary(country);            
